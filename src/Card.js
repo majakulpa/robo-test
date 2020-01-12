@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
-import CardDesc from './CardDesc'
 import './Card.css'
 
 class Card extends Component {
     constructor() {
         super()
         this.state = {
-            pictures: []
+            users: []
         }
     }
 
@@ -15,17 +14,20 @@ class Card extends Component {
         .then(results => {
           return results.json();
         }).then(data => {
-          let pictures = data.results.map((pic) => {
+          let users = data.results.map((pic) => {
             return(
               <div key={pic.results}>
-                <div>
+                <div className="card">
                     <img src={pic.picture.large} alt='avatar' />
-                    <CardDesc/>
+                    <h4>{pic.name.first} {pic.name.last}</h4>
+                    <p>{pic.location.city}</p>
+                    <p>{pic.cell}</p>
+                    <p>{pic.email}</p>
                 </div>
               </div>
             )
           })
-          this.setState({pictures: pictures});
+          this.setState({users: users});
           //console.log("state", this.state.pictures);
         })
       }
@@ -34,7 +36,7 @@ class Card extends Component {
         return (
             <div>
                 <h1>My Friends</h1>
-                <div className="background">{this.state.pictures}</div>
+                <div className="background">{this.state.users}</div>
             </div>
         )
       }
