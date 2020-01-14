@@ -1,10 +1,10 @@
 import React from "react";
 import "./Card.css";
 
-const Card = ({ users }) => {
+const Card = ({ user }) => {
   return (
     <div>
-      <div className="background">{users}</div>
+      <div className="background">{user}</div>
     </div>
   );
 };

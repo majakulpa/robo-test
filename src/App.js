@@ -12,7 +12,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("https://www.randomuser.me/api/?results=500")
+    fetch(
+      "https://randomuser.me/api/?results=500&inc=name,email,cell,location,picture"
+    )
       .then(results => {
         return results.json();
       })
@@ -43,8 +45,8 @@ class App extends Component {
   };
 
   render() {
-    const filteredUsers = this.state.users.filter(users => {
-      return users.name.first
+    const filteredUsers = this.state.users.filter(user => {
+      return user.name.first
         .toLowerCase()
         .includes(this.state.searchfield.toLowerCase());
       console.log(filteredUsers);
@@ -53,7 +55,7 @@ class App extends Component {
       <div>
         <h1>My Friends</h1>
         <SearchBox searchChange={this.onSearchChange} />
-        <Card users={filteredUsers} />
+        <Card user={filteredUsers} />
       </div>
     );
   }
